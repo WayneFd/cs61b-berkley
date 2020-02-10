@@ -49,6 +49,7 @@ public class NBody{
 
     double time = 0;
     int length = allPlanets.length;
+    StdAudio.play("audio/2001.mid");
     while (time <= T){
       double[] xForces = new double[length];
       double[] yForces = new double[length];

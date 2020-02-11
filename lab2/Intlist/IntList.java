@@ -81,9 +81,6 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        if (A == null) {
-            return B;
-        }
         IntList ptr = A;
         while (ptr.rest != null) {
             ptr = ptr.rest;
@@ -92,30 +89,35 @@ public class IntList {
         return A;
     }
     /** return a list of the same one Non-destructive */
-    public static IntList copySelf(IntList A) {
-        if (A == null) {
-            return null;
-        }
-        return new IntList(A.first, copySelf(A.rest));
-    }
+//    public static IntList copySelf(IntList A) {
+//        if (A == null) {
+//            return null;
+//        }
+//        return new IntList(A.first, copySelf(A.rest));
+//    }
 
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        IntList ans;
-        IntList ptr = copySelf(A);
-        IntList follower = copySelf(B);
-        if (ptr == null) {
-            return follower;
+//        IntList ans;
+//        IntList ptr = copySelf(A);
+//        IntList follower = copySelf(B);
+//        if (ptr == null) {
+//            return follower;
+//        }
+//        ans = ptr;
+//        while (ptr.rest != null) {
+//            ptr = ptr.rest;
+//        }
+//        ptr.rest = follower;
+//        return ans;
+        if (A == null) {
+            return new IntList(B.first,B.rest);
+        } else {
+            return new IntList(A.first,catenate(A.rest,B));
         }
-        ans = ptr;
-        while (ptr.rest != null) {
-            ptr = ptr.rest;
-        }
-        ptr.rest = follower;
-        return ans;
 
     }
 

@@ -117,6 +117,9 @@ public class IntList {
 //        ptr.rest = follower;
 //        return ans;
         if (A == null) {
+            if (B == null) {
+                return null;
+            }
             return new IntList(B.first,B.rest);
         } else {
             return new IntList(A.first,catenate(A.rest,B));

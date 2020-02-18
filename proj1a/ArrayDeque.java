@@ -55,7 +55,7 @@ public class ArrayDeque<T> {
 
     /* prints the items in the deque from first to last */
     public void printDeque() {
-        for (int i = 1; i < =size; i++) {
+        for (int i = 1; i <= size; i++) {
             int index = (nextfirst + i) % deque.length;
             System.out.print((String) deque[index] + ' ');
         }

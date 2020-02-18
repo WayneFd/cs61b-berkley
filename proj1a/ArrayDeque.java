@@ -55,7 +55,7 @@ public class ArrayDeque<T> {
 
     /* prints the items in the deque from first to last */
     public void printDeque() {
-        for (int i = 1; i < size; i++) {
+        for (int i = 1; i < =size; i++) {
             int index = (nextfirst + i) % deque.length;
             System.out.print((String) deque[index] + ' ');
         }
@@ -65,42 +65,40 @@ public class ArrayDeque<T> {
 
     /* remove the first item and return the value */
     public T removeFirst() {
+        if (size < deque.length / 4 && deque.length > 16) {
+            resize(deque.length / 2);
+        }
         int index = (nextfirst + 1) % deque.length;
         T remove = deque[index];
         deque[index] = null;
         nextfirst += 1;
-        if (nextfirst == deque.length) {
-            nextfirst -= 1;
-        }
         if (!isEmpty()) {
             size -= 1;
-        }
-        if (size < deque.length / 4 && deque.length > 16) {
-            resize(deque.length / 2);
         }
         return remove;
     }
 
     /* remove the last item and return the value  */
     public T removeLast() {
+        if (size < deque.length / 4 && deque.length > 16) {
+            resize(deque.length / 2);
+        }
         int index = (nextlast - 1) % deque.length;
         T remove = deque[index];
         deque[index] = null;
         nextlast -= 1;
-        if (nextlast == -1) {
-            nextlast += 1;
-        }
         if (!isEmpty()) {
             size -= 1;
         }
-        if (size < deque.length / 4 && deque.length > 16) {
-            resize(deque.length / 2);
-        }
+
         return remove;
     }
 
     /* get the item at the given index */
     public T get(int index) {
+        if (index >= size) {
+            return null;
+        }
         int p = (nextfirst + index + 1) % deque.length;
         T item = deque[p];
         return  item;

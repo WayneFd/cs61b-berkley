@@ -1,4 +1,4 @@
-public class ArrayDeque <T> {
+public class ArrayDeque<T> {
 
     private T[] deque;
     private int size;
@@ -9,16 +9,16 @@ public class ArrayDeque <T> {
         deque = (T []) new Object[8];
         size = 0;
         nextlast = 0;
-        nextfirst = deque.length -1;
+        nextfirst = deque.length - 1;
     }
     /* resize the length of the item */
-    public void resize(int capacity) {
-        T[] newdeque= (T []) new Object[capacity];
-        for (int i =1; i <= size; i++) {
+    private void resize(int capacity) {
+        T[] newdeque = (T []) new Object[capacity];
+        for (int i = 1; i <= size; i++) {
             int index = (nextfirst + i) % deque.length;
-            newdeque[i-1] = deque[index];
+            newdeque[i - 1] = deque[index];
         }
-        nextfirst = newdeque.length-1;
+        nextfirst = newdeque.length - 1;
         nextlast = size;
         deque = newdeque;
 
@@ -36,7 +36,7 @@ public class ArrayDeque <T> {
     /* adds an item to the back of the deque */
     public void addLast(T item) {
         if (size == deque.length) {
-            resize( 2 * size );
+            resize(2 * size);
         }
         deque[nextlast] = item;
         size += 1;
@@ -55,9 +55,9 @@ public class ArrayDeque <T> {
 
     /* prints the items in the deque from first to last */
     public void printDeque() {
-        for (int i = 1 ; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             int index = (nextfirst + i) % deque.length;
-            System.out.print((String)deque[index] + ' ');
+            System.out.print((String) deque[index] + ' ');
         }
         System.out.print('\n');
 
@@ -75,38 +75,36 @@ public class ArrayDeque <T> {
         if (!isEmpty()) {
             size -= 1;
         }
-        if ( size < 0.25 * deque.length) {
-            resize((int)0.5 * deque.length);
+        if (size < deque.length / 4 && deque.length > 16) {
+            resize(deque.length / 2);
         }
         return remove;
     }
 
     /* remove the last item and return the value  */
     public T removeLast() {
-        int index = (nextlast - 1) %deque.length;
+        int index = (nextlast - 1) % deque.length;
         T remove = deque[index];
         deque[index] = null;
         nextlast -= 1;
         if (nextlast == -1) {
-          nextlast +=1;
+            nextlast += 1;
         }
         if (!isEmpty()) {
             size -= 1;
         }
-        if ( size < 0.25 * deque.length) {
-            resize((int)0.5 * deque.length);
+        if (size < deque.length / 4 && deque.length > 16) {
+            resize(deque.length / 2);
         }
         return remove;
     }
 
     /* get the item at the given index */
-    public T get (int index ) {
-        int p = (nextfirst + index +1) % deque.length;
+    public T get(int index) {
+        int p = (nextfirst + index + 1) % deque.length;
         T item = deque[p];
         return  item;
     }
-
-
 
 
 }

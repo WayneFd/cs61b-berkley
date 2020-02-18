@@ -4,6 +4,16 @@ public class ArrayDeque<T> {
     private int size;
     private int nextlast;
     private int nextfirst;
+
+    /* add one to realize circular array */
+    private int plusone(int index) {
+        return (index + 1) % deque.length;
+    }
+
+    /* minus one to realize circular array */
+    private int minusone(int index) {
+        return (index - 1 + deque.length) % deque.length;
+    }
     /* create empty ArrayDeque */
     public ArrayDeque() {
         deque = (T []) new Object[8];
@@ -30,7 +40,7 @@ public class ArrayDeque<T> {
         }
         deque[nextfirst] = item;
         size += 1;
-        nextfirst -= 1;
+        nextfirst = minusone(nextfirst);
     }
 
     /* adds an item to the back of the deque */
@@ -40,7 +50,7 @@ public class ArrayDeque<T> {
         }
         deque[nextlast] = item;
         size += 1;
-        nextlast += 1;
+        nextlast = plusone(nextlast);
     }
 
     /* return true if the deque is empty */
@@ -68,10 +78,10 @@ public class ArrayDeque<T> {
         if (size < deque.length / 4 && deque.length > 16) {
             resize(deque.length / 2);
         }
-        int index = (nextfirst + 1) % deque.length;
+        int index = plusone(nextfirst);
         T remove = deque[index];
         deque[index] = null;
-        nextfirst += 1;
+        nextfirst = plusone(nextfirst);
         if (!isEmpty()) {
             size -= 1;
         }
@@ -83,10 +93,10 @@ public class ArrayDeque<T> {
         if (size < deque.length / 4 && deque.length > 16) {
             resize(deque.length / 2);
         }
-        int index = (nextlast - 1) % deque.length;
+        int index = minusone(nextlast);
         T remove = deque[index];
         deque[index] = null;
-        nextlast -= 1;
+        nextlast = minusone(nextlast);
         if (!isEmpty()) {
             size -= 1;
         }

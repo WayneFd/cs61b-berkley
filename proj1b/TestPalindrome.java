@@ -25,7 +25,7 @@ public class TestPalindrome {
         assertFalse(palindrome.isPalindrome(casetwo));
         String casethree = "noon";
         assertTrue(palindrome.isPalindrome(casethree));
-        String casefour = "abcba" ;
+        String casefour = "abcba";
         assertTrue(palindrome.isPalindrome(casefour));
         String casefive = "ABCDCba";
         assertFalse(palindrome.isPalindrome(casefive));
@@ -36,8 +36,8 @@ public class TestPalindrome {
     }
     @Test
     public void testisPalindromeoff() {
-        assertTrue(palindrome.isPalindrome("flake",cc));
-        assertFalse(palindrome.isPalindrome("aha",cc));
+        assertTrue(palindrome.isPalindrome("flake", cc));
+        assertFalse(palindrome.isPalindrome("aha", cc));
 
     }
 }

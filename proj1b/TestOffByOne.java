@@ -7,12 +7,14 @@ public class TestOffByOne {
     static CharacterComparator offByOne = new OffByOne();
 
     @Test
-    public void testOffByOne(){
-        assertTrue(offByOne.equalChars('a','b'));
-        assertTrue(offByOne.equalChars('r','q'));
-        assertFalse(offByOne.equalChars('a','e'));
-        assertFalse(offByOne.equalChars('a','z'));
-        assertFalse(offByOne.equalChars('a','a'));
-        assertTrue(offByOne.equalChars('&','%'));
+    public void testOffByOne() {
+        assertTrue(offByOne.equalChars('a', 'b'));
+        assertTrue(offByOne.equalChars('r', 'q'));
+        assertFalse(offByOne.equalChars('a', 'e'));
+        assertFalse(offByOne.equalChars('a', 'z'));
+        assertFalse(offByOne.equalChars('a', 'a'));
+        assertTrue(offByOne.equalChars('&', '%'));
+        assertFalse(offByOne.equalChars('A','b'));
+        assertFalse(offByOne.equalChars('A','Z'));
     }
 }

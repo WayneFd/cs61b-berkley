@@ -1,8 +1,8 @@
 public class Palindrome {
     /* transform a word to a deque */
     public Deque<Character> wordToDeque(String word) {
-        Deque<Character> deque= new LinkedListDeque<>();
-        for (int i = 0; i< word.length(); i++) {
+        Deque<Character> deque = new LinkedListDeque<>();
+        for (int i = 0; i < word.length(); i++) {
             deque.addLast(word.charAt(i));
         }
         return deque;
@@ -28,12 +28,12 @@ public class Palindrome {
     }
 
     /* return true if the given word is offbyone Palindrome */
-    public boolean isPalindrome(String word,CharacterComparator cc) {
-        return isPalindrome(wordToDeque(word),cc);
+    public boolean isPalindrome(String word, CharacterComparator cc) {
+        return isPalindrome(wordToDeque(word), cc);
     }
 
     /* help function */
-    private boolean isPalindrome(Deque<Character> word,CharacterComparator cc) {
+    private boolean isPalindrome(Deque<Character> word, CharacterComparator cc) {
         if (word.size() <= 1) {
             return true;
         } else {

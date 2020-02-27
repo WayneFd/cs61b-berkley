@@ -1,6 +1,6 @@
 /** This class outputs all palindromes in the words file in the current directory. */
 import java.util.Scanner;
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.In;
 public class PalindromeFinder {
 
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class PalindromeFinder {
         CharacterComparator cc = new OffByN(N);
         while (!in.isEmpty()) {
             String word = in.readString();
-            if (word.length() >= minLength && palindrome.isPalindrome(word,cc)) {
+            if (word.length() >= minLength && palindrome.isPalindrome(word, cc)) {
                 System.out.println(word);
             }
         }

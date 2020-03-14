@@ -1,9 +1,10 @@
-import edu.princeton.cs.introcs.*;
+import edu.princeton.cs.introcs.StdDraw;
+import edu.princeton.cs.introcs.StdAudio;
 
-import javax.sound.midi.Synthesizer;
-import synthesizer.*;
-import java.util.ArrayList;
-import java.util.stream.Stream;
+//import javax.sound.midi.Synthesizer;
+import synthesizer.GuitarString;
+//import java.util.ArrayList;
+//import java.util.stream.Stream;
 
 public class GuitarHero {
     private static String keyboard = "q2we4r5ty7u8i9op-[=zxdcfvgbnjmk,.;/' ";
@@ -12,7 +13,7 @@ public class GuitarHero {
     public static void main(String[] args) {
         GuitarString[] buttom = new GuitarString[37];
         for (int i = 0; i < 37; i++) {
-          buttom[i] = new GuitarString(CONCERT_A * Math.pow(2,(i-24) / 12.0));
+            buttom[i] = new GuitarString(CONCERT_A * Math.pow(2, (i - 24) / 12.0));
         }
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {

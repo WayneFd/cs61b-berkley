@@ -3,6 +3,7 @@ package hw2;
 //import java.sql.Time;
 //import java.util.Map;
 
+
 public class PercolationStats {
     private int times;
     private double[] opened;
@@ -18,7 +19,7 @@ public class PercolationStats {
                 int col = (int) (Math.random() * N);
                 expe.open(row, col);
             }
-            opened[i] = expe.numberOfOpenSites();
+            opened[i] = (double) expe.numberOfOpenSites() / (N * N);
         }
     }
     public double mean() {
@@ -29,7 +30,7 @@ public class PercolationStats {
         return mean / times;
     }
 
-    public double stdddev() {
+    public double stddev() {
         double mean = mean();
         double sigma = 0.0;
         for (int i = 0; i < opened.length; i++) {
@@ -39,11 +40,36 @@ public class PercolationStats {
     }
 
     public double confidenceLow() {
-        return mean() - 1.96 * stdddev() / Math.sqrt(times);
+        return mean() - 1.96 * stddev() / Math.sqrt(times);
     }
 
     public double confidenceHige() {
-        return mean() + 1.96 * stdddev() / Math.sqrt(times);
+        return mean() + 1.96 * stddev() / Math.sqrt(times);
     }
+
+//    public static void main(String[] args) {
+//        double[] time = new double[200];
+//        PercolationFactory pf = new PercolationFactory();
+//        for (int N = 1; N <= 200; N++) {
+//            Stopwatch sw = new Stopwatch();
+//            PercolationStats test = new PercolationStats(N, 1, pf);
+//            time[N - 1] = sw.elapsedTime();
+//
+//        }
+//        StdDraw.setXscale(0, 40);
+//        StdDraw.setYscale(0, 2);
+//        StdDraw.setPenRadius(0.01);
+//        for (int i = 0; i < 200; i++) {
+//            StdDraw.point(i, time[i]);
+//        }
+//
+////
+////        System.out.println(test.mean());
+////        System.out.println(test.stddev());
+////        System.out.println(test.confidenceHige());
+////        System.out.println(test.confidenceLow());
+////        System.out.println(test.opened[1]);
+//    }
+
 
 }

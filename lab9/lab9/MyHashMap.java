@@ -7,7 +7,7 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author Wayne
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
@@ -17,7 +17,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     private ArrayMap<K, V>[] buckets;
     private int size;
 
-    private int loadFactor() {
+    private double loadFactor() {
         return size / buckets.length;
     }
 
@@ -53,19 +53,51 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        int hash = hash(key);
+        ArrayMap<K, V> target = buckets[hash];
+        return  target.get(key);
     }
-
+    private void resize(int capacity) {
+        ArrayMap<K, V>[] newbuckets = new ArrayMap[capacity];
+        size = 0;
+        for (int i = 0; i < newbuckets.length; i += 1) {
+            newbuckets[i] = new ArrayMap<>();
+        }
+        for (int i = 0; i < buckets.length; i++) {
+            for (K key : buckets[i]) {
+                V value = buckets[i].get(key);
+                puthelper(key, value, newbuckets);
+            }
+        }
+        buckets = newbuckets;
+    }
     /* Associates the specified value with the specified key in this map. */
+    private void puthelper(K key, V value, ArrayMap<K, V>[] p) {
+        if (key == null) {
+            throw new  IllegalArgumentException("Ket can not be null");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("Value can not be null");
+        }
+        int hash = hash(key);
+        ArrayMap<K, V> target = p[hash];
+        if (target.get(key) == null) {
+            size += 1;
+        }
+        target.put(key, value);
+    }
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+        if (loadFactor() > MAX_LF) {
+            resize(2 * buckets.length);
+        }
+        puthelper(key, value, buckets);
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return size;
     }
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////

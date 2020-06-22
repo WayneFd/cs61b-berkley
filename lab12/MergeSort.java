@@ -34,8 +34,13 @@ public class MergeSort {
     /** Returns a queue of queues that each contain one item from items. */
     private static <Item extends Comparable> Queue<Queue<Item>>
             makeSingleItemQueues(Queue<Item> items) {
-        // Your code here!
-        return null;
+        Queue<Queue<Item>> ans = new Queue<>();
+        for (Item curr: items) {
+            Queue<Item> temp = new Queue<>();
+            temp.enqueue(curr);
+            ans.enqueue(temp);
+        }
+        return ans;
     }
 
     /**
@@ -53,14 +58,36 @@ public class MergeSort {
      */
     private static <Item extends Comparable> Queue<Item> mergeSortedQueues(
             Queue<Item> q1, Queue<Item> q2) {
-        // Your code here!
-        return null;
+       Queue<Item> ans = new Queue<>();
+       while(!q1.isEmpty() || !q2.isEmpty()) {
+           Item curr = getMin(q1, q2);
+           ans.enqueue(curr);
+       }
+       return ans;
     }
 
     /** Returns a Queue that contains the given items sorted from least to greatest. */
     public static <Item extends Comparable> Queue<Item> mergeSort(
             Queue<Item> items) {
-        // Your code here!
-        return items;
+        if (items.size() == 1) {
+            return items;
+        }
+        Queue<Queue<Item>> target = makeSingleItemQueues(items);
+        int leftindex = items.size() / 2;
+        Queue<Item> left = new Queue<>();
+        Queue<Item> right = new Queue<>();
+        for (int i = 0; i < leftindex; i++) {
+            left.enqueue(target.dequeue().dequeue());
+        }
+        int rightindex = items.size();
+        for (int j = leftindex; j < rightindex; j++) {
+            right.enqueue(target.dequeue().dequeue());
+        }
+        Queue<Item> sleft = mergeSort(left);
+        Queue<Item> sright = mergeSort(right);
+        Queue<Item> ans = mergeSortedQueues(sleft, sright);
+
+        return ans;
     }
+
 }

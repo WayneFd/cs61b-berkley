@@ -15,7 +15,7 @@ public class TestBoard {
                 cnt += 1;
             }
         }
-        Board b = new Board(x);
+        Board b =  new Board(x);
         assertEquals("Your Board class is not being initialized with the right values.", 0, b.tileAt(0, 0));
         assertEquals("Your Board class is not being initialized with the right values.", 1, b.tileAt(0, 1));
         assertEquals("Your Board class is not being initialized with the right values.", 2, b.tileAt(1, 0));
